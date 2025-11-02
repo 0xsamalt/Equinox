@@ -1,6 +1,6 @@
 # Equinox - Parametric DeFi Insurance
 
-<h4 align="center">
+<h4 align="left">
   A Decentralized Insurance Protocol 
 </h4>
 
@@ -30,7 +30,7 @@ if (Protocol_Safety_Score < Your_Policy_Strike_Score) => Payout_Is_Enabled
 
 Core Features
 
-Parametric Payouts: Automatically triggered by on-chain data, not a claims committee.
+Parametric Payouts: Automatically triggered by on-chain data, not a claims committee (Currently It Checks Safety Score on Manual Click of user to claim insurance).
 
 Trustless Oracle: Uses a zk-Oracle (powered by RISC Zero) to verifiably compute a protocol's safetyScore (e.g., (Assets - Liabilities) / Assets) off-chain. This makes the trigger trustless.
 
@@ -45,6 +45,7 @@ MockUSDC: 0xd06Bd4495e0FE6d7d537a3DF014B6ABf401bf581
 Oracle: 0x613fbaA88E221407248E4831f927875c0a68D3C5
 PremiumVault: 0xf2538f7DE80442DF33055213dcc09d20825c58ef
 EquinoxProtocol: 0xDD19349a861D4Fc093168fA843A975aC774bd2e9
+
 ## Features
 
 - **Smart Insurance Contracts**: Robust and auditable insurance policies powered by Solidity
@@ -88,7 +89,35 @@ The project is organized into several key packages:
 
 ### RiskZero Package (`/packages/riskZero`)
 
-- Risk assessment and verification system
+  - 1. The Guest Program (Rust - runs in zkVM)
+This is the actual computation logic that runs inside the RISC Zero zero-knowledge virtual machine.
+Location: methods/guest/src/main.rs (RISC Zero convention)
+What it does:
+
+Receives input data (protocol addresses, RPC endpoint data)
+Executes the safety score calculation logic
+Commits the final result to a "public journal" (this is what goes on-chain)
+The zkVM automatically generates a cryptographic proof (the "seal") of this execution
+
+Key Concept: This program runs in a sandboxed, deterministic environment. Every single instruction is traced and proven. The resulting "seal" is a ZK-STARK that cryptographically proves "this exact code was executed with this input, producing this output."
+
+- 2. The Host Program (Rust - runs off-chain)
+This is the orchestrator that runs on a normal server/computer.
+Location: host/src/main.rs
+What it does:
+
+Fetches real-time data from the blockchain (via RPC calls to Aave contracts)
+Prepares this data and passes it as input to the guest program
+Executes the guest program inside the RISC Zero zkVM
+Receives back:
+
+The journal (public output - the safety score)
+The seal (the ZK proof)
+
+
+Submits these to your EquinoxOracle.sol smart contract
+
+Key Concept: The host is "untrusted" - it could be run by anyone. The blockchain doesn't trust the host; it only trusts the cryptographic proof the host provides.
 
 ## System Architecture
 
