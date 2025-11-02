@@ -1,18 +1,50 @@
-# Equinox
+# Equinox - Parametric DeFi Insurance
 
 <h4 align="center">
-  A Decentralized Insurance Protocol
+  A Decentralized Insurance Protocol 
 </h4>
 
-Equinox is a comprehensive decentralized insurance protocol built on Ethereum, combining robust smart contracts with multiple frontend implementations and advanced risk assessment capabilities.
+DeRisk is a decentralized, non-custodial, and trustless insurance protocol for DeFi assets. It protects users from protocol solvency risk using a "zk-Oracle" to trigger automated, instant payouts (currently manual).
 
-Built using:
+This project was built for the [BlockSoc-Residency-TriHackathon] (2025).
 
-- Smart Contracts: Solidity, Foundry
-- Frontend: React/Vite, Next.js, TypeScript
-- Risk Assessment: Rust
-- Tools: Wagmi, Viem, RainbowKit
+## 1. The Problem
 
+DeFi is risky. When you deposit into a high-yield protocol, you are exposed to "black swan" events:
+
+Smart Contract Bugs: A novel hack or exploit.
+
+Bad Debt: A market crash so fast that liquidations fail, making the protocol insolvent.
+
+Slashing: For Liquid Restaking Tokens (LRTs), this is a massive, unhedged risk.
+
+Traditional DeFi insurance is slow, manual, and centralized. It requires filing a claim and trusting a committee to vote on your payout.
+
+## 2. The Solution: DeRisk Protocol
+
+DeRisk is parametric insurance. It doesn't use claim forms. It uses math.
+
+The protocol is built on a simple, automated trigger:
+
+if (Protocol_Safety_Score < Your_Policy_Strike_Score) => Payout_Is_Enabled
+
+Core Features
+
+Parametric Payouts: Automatically triggered by on-chain data, not a claims committee.
+
+Trustless Oracle: Uses a zk-Oracle (powered by RISC Zero) to verifiably compute a protocol's safetyScore (e.g., (Assets - Liabilities) / Assets) off-chain. This makes the trigger trustless.
+
+Non-Custodial: All funds are held in the PremiumVault smart contract.
+
+Permissionless: No KYC. Anyone can buy a policy.
+
+Tokenized Policies: Policies are minted as EIP-1155 NFTs. You can hold them, trade them, or use them as collateral
+
+## Address of Deployed And Verified Contracts:
+MockUSDC: 0xd06Bd4495e0FE6d7d537a3DF014B6ABf401bf581
+Oracle: 0x613fbaA88E221407248E4831f927875c0a68D3C5
+PremiumVault: 0xf2538f7DE80442DF33055213dcc09d20825c58ef
+EquinoxProtocol: 0xDD19349a861D4Fc093168fA843A975aC774bd2e9
 ## Features
 
 - **Smart Insurance Contracts**: Robust and auditable insurance policies powered by Solidity
@@ -57,11 +89,24 @@ The project is organized into several key packages:
 ### RiskZero Package (`/packages/riskZero`)
 
 - Risk assessment and verification system
-- Built wi![Uploading image.png…]()
-th Rust
-- Includes minimal verification contracts
 
-## Getting Started
+## System Architecture
+
+This project consists of 3 core smart contracts and a frontend:
+
+DeRiskProtocol.sol (EIP-1155): The main logic contract. Handles buyPolicy and claimPayout. Mints/burns the policy NFTs.
+
+PremiumVault.sol (EIP-4626): A tokenized vault that holds all incoming premiums (USDC). It can earn yield on these premiums while they are not being used for claims.
+
+DeRiskOracle.sol: The oracle. Stores the safetyScore for all insured protocols.
+
+Frontend (React/Vite/Wagmi): The dApp that allows users to interact with the contracts.
+
+RiscZero Contracts:  Compute and Generate Generate 
+
+
+![System Architecture](resources/Architecture.png)
+
 
 ### Prerequisites
 
