@@ -6,7 +6,7 @@ import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import { DeRiskOracle } from "./DeRiskOracle.sol";
+import { Oracle } from "./Oracle.sol";
 import { PremiumVault } from "./PremiumVault.sol";
 
 /**
@@ -14,12 +14,12 @@ import { PremiumVault } from "./PremiumVault.sol";
  * @notice Main insurance contract - issues policies as ERC-1155 NFTs
  * @dev Parametric insurance: payouts trigger automatically when safety score drops below strike
  */
-contract DeRiskProtocol is ERC1155, Ownable, ReentrancyGuard {
+contract EquinoxProtocol is ERC1155, Ownable, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
     /* ========== STATE VARIABLES ========== */
 
-    DeRiskOracle public immutable oracle;
+    Oracle public immutable oracle;
     PremiumVault public immutable vault;
     IERC20 public immutable usdc;
 
@@ -74,17 +74,17 @@ contract DeRiskProtocol is ERC1155, Ownable, ReentrancyGuard {
 
     /* ========== ERRORS ========== */
 
-    error DeRiskProtocol__InvalidProtocol();
-    error DeRiskProtocol__InvalidStrikeScore();
-    error DeRiskProtocol__InvalidDuration();
-    error DeRiskProtocol__InvalidPayoutAmount();
-    error DeRiskProtocol__PolicyDoesNotExist();
-    error DeRiskProtocol__NotPolicyOwner();
-    error DeRiskProtocol__PolicyExpired();
-    error DeRiskProtocol__PolicyAlreadyClaimed();
-    error DeRiskProtocol__StrikeNotBreached();
-    error DeRiskProtocol__InsufficientVaultBalance();
-    error DeRiskProtocol__PremiumTransferFailed();
+    error EquinoxProtocol__InvalidProtocol();
+    error EquinoxProtocol__InvalidStrikeScore();
+    error EquinoxProtocol__InvalidDuration();
+    error EquinoxProtocol__InvalidPayoutAmount();
+    error EquinoxProtocol__PolicyDoesNotExist();
+    error EquinoxProtocol__NotPolicyOwner();
+    error EquinoxProtocol__PolicyExpired();
+    error EquinoxProtocol__PolicyAlreadyClaimed();
+    error EquinoxProtocol__StrikeNotBreached();
+    error EquinoxProtocol__InsufficientVaultBalance();
+    error EquinoxProtocol__PremiumTransferFailed();
 
     /* ========== CONSTRUCTOR ========== */
 
@@ -99,7 +99,7 @@ contract DeRiskProtocol is ERC1155, Ownable, ReentrancyGuard {
         require(_vault != address(0), "DeRiskProtocol: zero vault");
         require(_usdc != address(0), "DeRiskProtocol: zero usdc");
 
-        oracle = DeRiskOracle(_oracle);
+        oracle = Oracle(_oracle);
         vault = PremiumVault(_vault);
         usdc = IERC20(_usdc);
     }
@@ -123,27 +123,27 @@ contract DeRiskProtocol is ERC1155, Ownable, ReentrancyGuard {
 
         // Check protocol is registered with oracle
         if (!oracle.isProtocolRegistered(protocol)) {
-            revert DeRiskProtocol__InvalidProtocol();
+            revert EquinoxProtocol__InvalidProtocol();
         }
 
         // Validate strike score
         if (strikeScore < MIN_STRIKE_SCORE || strikeScore > MAX_STRIKE_SCORE) {
-            revert DeRiskProtocol__InvalidStrikeScore();
+            revert EquinoxProtocol__InvalidStrikeScore();
         }
 
         // Validate duration
         if (durationInDays < MIN_DURATION_DAYS || durationInDays > MAX_DURATION_DAYS) {
-            revert DeRiskProtocol__InvalidDuration();
+            revert EquinoxProtocol__InvalidDuration();
         }
 
         // Validate payout amount
         if (payoutAmount == 0) {
-            revert DeRiskProtocol__InvalidPayoutAmount();
+            revert EquinoxProtocol__InvalidPayoutAmount();
         }
 
         // Check vault has sufficient balance
         if (vault.totalAssetsInVault() < payoutAmount) {
-            revert DeRiskProtocol__InsufficientVaultBalance();
+            revert EquinoxProtocol__InsufficientVaultBalance();
         }
 
         // ========== PREMIUM CALCULATION ==========
@@ -196,22 +196,22 @@ contract DeRiskProtocol is ERC1155, Ownable, ReentrancyGuard {
 
         // Check policy exists
         if (!policy.exists) {
-            revert DeRiskProtocol__PolicyDoesNotExist();
+            revert EquinoxProtocol__PolicyDoesNotExist();
         }
 
         // Check caller owns the policy NFT
         if (balanceOf(msg.sender, policyId) == 0) {
-            revert DeRiskProtocol__NotPolicyOwner();
+            revert EquinoxProtocol__NotPolicyOwner();
         }
 
         // Check policy not expired
         if (block.timestamp >= policy.expiry) {
-            revert DeRiskProtocol__PolicyExpired();
+            revert EquinoxProtocol__PolicyExpired();
         }
 
         // Check policy not already claimed
         if (policy.claimed) {
-            revert DeRiskProtocol__PolicyAlreadyClaimed();
+            revert EquinoxProtocol__PolicyAlreadyClaimed();
         }
 
         // ========== CHECK STRIKE CONDITION ==========
@@ -220,7 +220,7 @@ contract DeRiskProtocol is ERC1155, Ownable, ReentrancyGuard {
 
         // Strike must be breached (current score < strike score)
         if (currentScore >= policy.strikeScore) {
-            revert DeRiskProtocol__StrikeNotBreached();
+            revert EquinoxProtocol__StrikeNotBreached();
         }
 
         // ========== PROCESS CLAIM ==========
