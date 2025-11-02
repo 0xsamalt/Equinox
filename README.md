@@ -1,7 +1,7 @@
-# Equinox - Parametric DeFi Insurance
+# Equinox 
 
 <h4 align="left">
-  A Decentralized Insurance Protocol 
+  Parametric DeFi Insurance 
 </h4>
 
 DeRisk is a decentralized, non-custodial, and trustless insurance protocol for DeFi assets. It protects users from protocol solvency risk using a "zk-Oracle" to trigger automated, instant payouts (currently manual).
@@ -20,9 +20,9 @@ Slashing: For Liquid Restaking Tokens (LRTs), this is a massive, unhedged risk.
 
 Traditional DeFi insurance is slow, manual, and centralized. It requires filing a claim and trusting a committee to vote on your payout.
 
-## 2. The Solution: DeRisk Protocol
+## 2. The Solution: Equinox
 
-DeRisk is parametric insurance. It doesn't use claim forms. It uses math.
+Equinox is parametric insurance. It doesn't use claim forms. It uses math.
 
 The protocol is built on a simple, automated trigger:
 
