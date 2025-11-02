@@ -1,33 +1,33 @@
-# 🛡️ Equinox
+# Equinox
 
 <h4 align="center">
   A Decentralized Insurance Protocol
 </h4>
 
-🏗️ Equinox is a comprehensive decentralized insurance protocol built on Ethereum, combining robust smart contracts with multiple frontend implementations and advanced risk assessment capabilities.
+Equinox is a comprehensive decentralized insurance protocol built on Ethereum, combining robust smart contracts with multiple frontend implementations and advanced risk assessment capabilities.
 
-⚙️ Built using:
+Built using:
 
 - Smart Contracts: Solidity, Foundry
 - Frontend: React/Vite, Next.js, TypeScript
 - Risk Assessment: Rust
 - Tools: Wagmi, Viem, RainbowKit
 
-## 🌟 Features
+## Features
 
-- 📜 **Smart Insurance Contracts**: Robust and auditable insurance policies powered by Solidity
-- 💰 **Premium Management**: Advanced vault system for premium calculations and management
-- 🔮 **Oracle Integration**: Real-time data feeds for accurate risk assessment
-- 🎨 **Multiple Frontend Options**: Choose between Vite-based React or Next.js implementations
-- 🛠️ **Risk Assessment Engine**: Powered by Rust for high-performance risk calculations
-- � **Secure Wallet Integration**: Seamless connection with various wallet providers
-- � **Policy Management Dashboard**: User-friendly interface for managing insurance policies
+- **Smart Insurance Contracts**: Robust and auditable insurance policies powered by Solidity
+- **Premium Management**: Advanced vault system for premium calculations and management
+- **Oracle Integration**: Real-time data feeds for accurate risk assessment
+- **Multiple Frontend Options**: Choose between Vite-based React or Next.js implementations
+- **Risk Assessment Engine**: Powered by Rust for high-performance risk calculations
+- **Secure Wallet Integration**: Seamless connection with various wallet providers
+- **Policy Management Dashboard**: User-friendly interface for managing insurance policies
 
-## 📁 Project Structure
+## Project Structure
 
 The project is organized into several key packages:
 
-### 🏗️ Foundry Package (`/packages/foundry`)
+### Foundry Package (`/packages/foundry`)
 
 - Smart contract development and testing environment
 - Core contracts including:
@@ -36,7 +36,7 @@ The project is organized into several key packages:
   - `Oracle.sol`: Price feed and data oracle
 - Testing and deployment scripts
 
-### 🎨 Frontend Package (`/packages/frontend`)
+### Frontend Package (`/packages/frontend`)
 
 - Modern React frontend built with Vite
 - Features:
@@ -45,7 +45,7 @@ The project is organized into several key packages:
   - Wallet integration
   - Responsive design with Tailwind CSS
 
-### ⚡ Next.js Package (`/packages/nextjs`)
+### Next.js Package (`/packages/nextjs`)
 
 - Alternative frontend implementation using Next.js
 - Includes:
@@ -54,13 +54,14 @@ The project is organized into several key packages:
   - Scaffold-ETH components
   - Web3 service integrations
 
-### 🔒 RiskZero Package (`/packages/riskZero`)
+### RiskZero Package (`/packages/riskZero`)
 
 - Risk assessment and verification system
-- Built with Rust
+- Built wi![Uploading image.png…]()
+th Rust
 - Includes minimal verification contracts
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -135,13 +136,8 @@ Detailed documentation for each component can be found in their respective direc
 - Next.js: See `packages/nextjs/README.md`
 - Risk Assessment: See `packages/riskZero/ARCHITECTURE.md`
 
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## 📜 License
-
-This project is licensed under the terms of the license file in the root directory.
+## Contributing
+Made with love team Equinox
 
 ## 🔗 Links
 
