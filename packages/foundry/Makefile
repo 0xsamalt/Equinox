@@ -59,3 +59,6 @@ test:
 verify:
 	forge script script/VerifyAll.s.sol --ffi --rpc-url $(RPC_URL)
 
+deploy-sepolia :;
+	@forge script script/Deploy.s.sol:Deployer --rpc-url $(SEPOLIA_RPC_URL) --account myaccount --broadcast --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvv
+

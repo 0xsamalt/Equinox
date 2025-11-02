@@ -1,0 +1,78 @@
+{
+  "reserves": [
+    {
+      "token_address": "0xff34b3d4aee8ddcd6f9afffb6fe49bd371b8a357",
+      "total_atoken": 2882576740125551023434999865,
+      "total_stable_debt": 324574252433069500175937,
+      "total_variable_debt": 3010301268208376267908876935,
+      "price_usd": 100000000,
+      "decimals": 18
+    },
+    {
+      "token_address": "0xf8fb3713d459d7c1018bd0a49d19b4c44290ebe5",
+      "total_atoken": 423688004525888544075126656,
+      "total_stable_debt": 0,
+      "total_variable_debt": 443188262695786818565164605,
+      "price_usd": 3000000000,
+      "decimals": 18
+    },
+    {
+      "token_address": "0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8",
+      "total_atoken": 2642365131947866,
+      "total_stable_debt": 639164162438,
+      "total_variable_debt": 2729667182395825,
+      "price_usd": 100000000,
+      "decimals": 6
+    },
+    {
+      "token_address": "0x29f2d40b0605204364af54ec677bd022da425d03",
+      "total_atoken": 1128501436592088,
+      "total_stable_debt": 0,
+      "total_variable_debt": 2301778522369,
+      "price_usd": 6000000000000,
+      "decimals": 8
+    },
+    {
+      "token_address": "0xc558dbdd856501fcd9aaf1e62eae57a9f0629a3c",
+      "total_atoken": 11884677927606053163281,
+      "total_stable_debt": 0,
+      "total_variable_debt": 0,
+      "price_usd": 400000000000,
+      "decimals": 18
+    },
+    {
+      "token_address": "0xaa8e23fb1079ea71e0a56f48a2aa51851d8433d0",
+      "total_atoken": 2567867337086655,
+      "total_stable_debt": 951145105895,
+      "total_variable_debt": 2787097351815157,
+      "price_usd": 100000000,
+      "decimals": 6
+    },
+    {
+      "token_address": "0x88541670e55cc00beefd87eb59edd1b7c511ac9a",
+      "total_atoken": 2617412005178112113328800,
+      "total_stable_debt": 0,
+      "total_variable_debt": 0,
+      "price_usd": 30000000000,
+      "decimals": 18
+    },
+    {
+      "token_address": "0x6d906e526a4e2ca02097ba9d0caa3c382f52278e",
+      "total_atoken": 2929484966,
+      "total_stable_debt": 16180800,
+      "total_variable_debt": 2207197536,
+      "price_usd": 112600000,
+      "decimals": 2
+    },
+    {
+      "token_address": "0xc4bf5cbdabe595361438f8c6a187bdc330539c60",
+      "total_atoken": 0,
+      "total_stable_debt": 0,
+      "total_variable_debt": 100260893699240639491813922166,
+      "price_usd": 100000000,
+      "decimals": 18
+    }
+  ],
+  "protocol_name": "Aave V3",
+  "timestamp": 1762077720
+}

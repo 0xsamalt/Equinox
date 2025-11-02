@@ -1,25 +1,36 @@
-//SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.27;
 
-import "./DeployHelpers.s.sol";
-import { DeployYourContract } from "./DeployYourContract.s.sol";
+import "forge-std/Script.sol";
+import { EquinoxProtocol } from "../contracts/Equinox.sol";
+import { Oracle } from "../contracts/Oracle.sol";
+import { PremiumVault } from "../contracts/PremiumVault.sol";
+import { MockUSDC } from "../contracts/MockUSDC.sol";
 
-/**
- * @notice Main deployment script for all contracts
- * @dev Run this when you want to deploy multiple contracts at once
- *
- * Example: yarn deploy # runs this script(without`--file` flag)
- */
-contract DeployScript is ScaffoldETHDeploy {
+contract DeployScript is Script {
     function run() external {
-        // Deploys all your contracts sequentially
-        // Add new deployments here when needed
+        vm.startBroadcast();
 
-        DeployYourContract deployYourContract = new DeployYourContract();
-        deployYourContract.run();
+        // 1. Deploy MockUSDC
+        MockUSDC usdc = new MockUSDC();
 
-        // Deploy another contract
-        // DeployMyContract myContract = new DeployMyContract();
-        // myContract.run();
+        // 2. Deploy Oracle
+        Oracle oracle = new Oracle();
+
+        // 3. Deploy PremiumVault
+        PremiumVault vault = new PremiumVault(usdc, "Premium Vault", "pVAULT");
+
+        // 4. Deploy EquinoxProtocol
+        EquinoxProtocol equinox = new EquinoxProtocol(address(oracle), address(vault), address(usdc));
+
+        // 5. Set the vault’s DeRiskProtocol to Equinox
+        vault.setDeRiskProtocol(address(equinox));
+
+        vm.stopBroadcast();
+
+        console.log("MockUSDC:", address(usdc));
+        console.log("Oracle:", address(oracle));
+        console.log("PremiumVault:", address(vault));
+        console.log("EquinoxProtocol:", address(equinox));
     }
 }

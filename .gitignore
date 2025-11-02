@@ -21,3 +21,8 @@ node_modules
 
 # cli
 dist
+.env
+cache/
+packages/riskZero/.env
+packages/riskZero/.gitignore
+.gitignore
