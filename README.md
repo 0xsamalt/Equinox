@@ -4,7 +4,7 @@
   Parametric DeFi Insurance 
 </h4>
 
-DeRisk is a decentralized, non-custodial, and trustless insurance protocol for DeFi assets. It protects users from protocol solvency risk using a "zk-Oracle" to trigger automated, instant payouts (currently manual).
+Equinox is a decentralized, non-custodial, and trustless insurance protocol for DeFi assets. It protects users from protocol solvency risk using a "zk-Oracle" to trigger automated, instant payouts (currently manual).
 
 This project was built for the [BlockSoc-Residency-TriHackathon] (2025).
 
