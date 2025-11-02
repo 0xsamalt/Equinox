@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Deep space background */
+    --background: 250 60% 5%;
+    --foreground: 0 0% 98%;
+
+    /* Glass panels */
+    --card: 250 30% 15%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 250 30% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Neon cyan primary */
+    --primary: 180 100% 50%;
+    --primary-foreground: 250 60% 5%;
+
+    /* Purple secondary */
+    --secondary: 280 70% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted glass */
+    --muted: 250 20% 20%;
+    --muted-foreground: 240 10% 70%;
+
+    /* Pink accent */
+    --accent: 330 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Glass borders */
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.1;
+    --ring: 180 100% 50%;
+
+    --radius: 1rem;
+
+    /* Custom design tokens */
+    --glass-bg: 0 0% 100% / 0.05;
+    --glass-border: 0 0% 100% / 0.15;
+    --glow-cyan: 180 100% 50%;
+    --glow-purple: 280 70% 60%;
+    --glow-pink: 330 100% 60%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 100% 50%), hsl(280 70% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(280 70% 60%), hsl(330 100% 60%));
+    --gradient-background: linear-gradient(180deg, hsl(250 60% 5%), hsl(280 50% 8%));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Glass morphism utilities */
+  .glass {
+    @apply backdrop-blur-glass bg-white/5 border border-white/10;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:bg-white/10 hover:border-white/20;
+  }
+
+  /* Gradient text utilities */
+  .gradient-text {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  /* Glow effects */
+  .glow-cyan {
+    box-shadow: 0 0 20px hsl(var(--glow-cyan) / 0.5);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(var(--glow-purple) / 0.5);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 20px hsl(var(--glow-pink) / 0.5);
+  }
+}
